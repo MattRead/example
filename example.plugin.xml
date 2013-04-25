@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
+	<name>Example</name>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
+	<author url="http://mattread.com/">Matt Read</author>
+	<version>1.0</version>
+	<url>http://habariproject.org/</url>
+	<description><![CDATA[Adds a basic example post type.]]></description>
+	<copyright>2012</copyright>
+	<guid>217dbaee-bc81-42eb-adb9-d0cc6eb2d3d6</guid>
+</pluggable>
+ 
