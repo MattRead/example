@@ -23,6 +23,34 @@ class ExmaplePlugin extends Plugin
 		return isset($names[$type][$foruse]) ? $names[$type][$foruse] : $type; 
 	}
 
+    public function action_form_publish_example( $form, $post )
+    {
+		$form->settings->append( 'checkbox', 'phpexample', 'null:null', _t( 'PHP Exec', 'phpexec' ), 'tabcontrol_checkbox' );
+
+		if ( 0 != $post->id ) {
+			$form->phpexample->value = $post->info->phpexample == 'true';
+		}
+    }
+	
+	public function action_publish_post( $post, $form )
+	{
+		$post->info->phpexample = $form->phpexample->value ? 'true' : 'false';
+	}
+
+	function filter_post_content_example($content, $post)
+	{
+		if ( $post->info->phpexample == 'true' ) {
+			$content = str_replace('<!--php', '<?php', $content);
+			$content = str_replace('?-->', '?>', $content);
+			
+			ob_start();
+			$theme = Themes::create();
+			eval('?>' . $content . '<?php ');
+			$content = ob_get_clean();
+		}
+		return $content;
+	}
+
 	public function action_init()
 	{
 		$this->add_template('example.single', dirname($this->get_file()) . '/example.php');
